@@ -1,0 +1,104 @@
+<%include file="header.html" />
+
+<p> The input contours of the algorithm were obtained using the <i>img2freeman</i> command with following parameters:
+
+<ul>
+
+<li>  image  threshold  min <font color="blue"><i>tmin</i></font>: ${app.cfg['param']['tmin']}  </li>
+ <li>  image  threshold  max <font color="blue"><i>tmax</i></font>: ${app.cfg['param']['tmax']}
+%if app.cfg['param']['autothreshold']:
+(determined automatically by the Otsu algorithm)
+%endif
+</li>
+<li>  minimal contour size <font color="blue"><i>m</i></font>: ${app.cfg['param']['m']}  </li>
+</ul>
+</p>
+
+<p> The main algorithm was applied with the following parameters:
+<ul>
+
+</ul>
+</p>
+
+
+
+
+<BR>
+<BR>
+<form action="${app.base_url}" method="get">
+  <div class="action">
+    Restart this algorithm with new data.
+    <input type="submit" value="new input" />
+  </div>
+</form>
+
+<form action="${app.base_url + 'params'}" method="get">
+  <div class="action">
+    Restart this algorithm with new parameters.
+    <input type="hidden" name="key" value="${app.key}">
+    <input type="hidden" name="newrun" value="1">
+    <input type="submit" value="new parameters" />
+  </div>
+</form>
+
+<hr />
+
+<h2>Result</h2>
+
+<p>You can download the resulting ATC in  <a href="${app.work_url+'outputATC.eps'}">eps</a> format, or download the  <a href="${app.work_url+'inputPolygon.sdp'}">input </a> with the resulting <a href="${app.work_url+'outputLMST.eps'}">LMST</a> and <a href="${app.work_url+'outputConvexConcave.eps'}">convex/concave parts</a> in eps format </p>
+
+
+<div class="gallery" style="height:${height}px">
+  <ul class="index">
+    <li>
+      <a href="${app.work_url+'input_0.png'}">input.png
+	<span>
+	  <img height="${height}" src="${app.work_url + 'input_0.png'}" alt="input" />
+	</span>
+      </a>
+    </li>
+    <li>
+      <a href="${app.work_url+'outputATC.png'}">outputATC.png
+	<span>
+	  <img  height="${height}" src="${app.work_url + 'outputATC.png'}" alt="output ATC" />
+	</span>
+      </a>
+    </li>
+    <li>
+      <a href="${app.work_url+'outputLMST.png'}">outputLMST.png
+	<span>
+	  <img  height="${height}" src="${app.work_url + 'outputLMST.png'}" alt="output LMST" />
+	</span>
+      </a>
+    </li>
+    <li>
+      <a href="${app.work_url+'outputConvexConcave.png'}">outputConvexConcave.png
+	<span>
+	  <img  height="${height}" src="${app.work_url + 'outputConvexConcave.png'}" alt="output Convex/Concave parts" />
+	</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+<h2>
+  <a class="toggle" href="#commands" onclick="toggle('commands');">
+    Additional Info
+  </a>
+</h2>
+<div id="commands" style="display:none">
+<p>
+The algorithm ran with the following commands:
+<pre class="stdio"> ${app.list_commands} </pre>
+</p>
+</div>
+
+
+
+
+<hr />
+<%include file="archive_info.html" />
+
+<%include file="footer.html" />
